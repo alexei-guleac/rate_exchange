@@ -1,0 +1,75 @@
+// orange
+
+-- before app start first create db schimb-valutar via pgadmin
+
+API documentation
+http://localhost:8080/v2/api-docs
+
+
+20200809172250
+GET http://localhost:8080/rates
+
+output:
+[
+  {
+    "id": 1,
+    "currency": "USD",
+    "factor": 1,
+    "rate": 16.62,
+    "updatedAt": "2020-08-09T14:22:28.211+00:00"
+  },
+  {
+    "id": 2,
+    "currency": "EUR",
+    "factor": 1,
+    "rate": 19.68,
+    "updatedAt": "2020-08-09T14:22:28.211+00:00"
+  },
+  {
+    "id": 3,
+    "currency": "BGN",
+    "factor": 1,
+    "rate": 10.07,
+    "updatedAt": "2020-08-09T14:22:28.211+00:00"
+  }
+]
+
+
+GET http://localhost:8080//retrieve?code=usd
+
+output:
+{
+    "currencyCode": "USD",
+    "factor": 1,
+    "rate": 16.62,
+    "dateRate": "2020-08-09T14:22:28.211+00:00"
+}
+
+
+POST http://localhost:8080//exchange
+
+body:
+{
+    "currencyCode": "USD",
+    "rate": 16.62,
+    "amountReceived": 100,
+    "issuedAmount": 1662
+}
+
+
+
+
+create table exchange_operation
+(
+	id bigserial not null
+		constraint exchange_operation_pkey
+			primary key,
+	amount_received double precision,
+	currency integer,
+	issued_amount double precision,
+	performed_at timestamp,
+	rate double precision
+);
+
+alter table exchange_operation owner to postgres;
+

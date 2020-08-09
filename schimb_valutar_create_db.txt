@@ -1,0 +1,45 @@
+
+DATABASE
+
+
+create table exchange_rate
+(
+	id bigint not null
+		constraint exchange_rate_pkey
+			primary key,
+	currency integer,
+	factor integer,
+	rate double precision,
+	updated_at timestamp
+);
+
+alter table exchange_rate owner to postgres;
+
+
+create table cash
+(
+	id bigserial not null
+		constraint cash_pkey
+			primary key,
+	amount double precision,
+	currency integer,
+	updated_at timestamp,
+	username integer
+);
+
+alter table cash owner to postgres;
+
+
+create table exchange_operation
+(
+	id bigserial not null
+		constraint exchange_operation_pkey
+			primary key,
+	amount_received double precision,
+	currency integer,
+	issued_amount double precision,
+	performed_at timestamp,
+	rate double precision
+);
+
+alter table exchange_operation owner to postgres;

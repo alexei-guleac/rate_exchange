@@ -1,9 +1,9 @@
-package com.example.schimb.service;
+package com.example.schimb.service.data;
 
 
-import com.example.schimb.model.Currency;
-import com.example.schimb.model.ExchangeRate;
-import com.example.schimb.repository.CurrencyExchangeRepository;
+import com.example.schimb.model.exchange.Currency;
+import com.example.schimb.model.exchange.ExchangeRate;
+import com.example.schimb.repository.exchange.CurrencyExchangeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

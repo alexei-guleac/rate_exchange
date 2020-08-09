@@ -1,4 +1,4 @@
-package com.example.schimb.model;
+package com.example.schimb.model.exchange;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

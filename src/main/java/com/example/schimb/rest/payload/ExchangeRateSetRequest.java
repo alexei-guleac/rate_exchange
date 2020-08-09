@@ -1,6 +1,6 @@
 package com.example.schimb.rest.payload;
 
-import com.example.schimb.model.Currency;
+import com.example.schimb.model.exchange.Currency;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;

@@ -1,7 +1,6 @@
-package com.example.schimb.repository;
+package com.example.schimb.repository.exchange;
 
-import com.example.schimb.model.ExchangeOperation;
-import com.example.schimb.model.ExchangeRate;
+import com.example.schimb.model.exchange.ExchangeOperation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

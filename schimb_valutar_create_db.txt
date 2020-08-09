@@ -1,7 +1,6 @@
 
 DATABASE
 
-
 create table exchange_rate
 (
 	id bigint not null

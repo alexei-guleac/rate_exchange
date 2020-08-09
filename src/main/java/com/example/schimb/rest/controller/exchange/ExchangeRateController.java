@@ -1,21 +1,17 @@
-package com.example.schimb.rest.controller;
+package com.example.schimb.rest.controller.exchange;
 
 import com.example.schimb.exceptions.CurrencyNotFoundException;
-import com.example.schimb.model.Currency;
-import com.example.schimb.model.ExchangeOperation;
-import com.example.schimb.model.ExchangeRate;
+import com.example.schimb.model.exchange.Currency;
+import com.example.schimb.model.exchange.ExchangeRate;
 import com.example.schimb.rest.payload.ExchangeRateResponse;
 import com.example.schimb.rest.payload.ExchangeRateSetRequest;
 import com.example.schimb.service.ApiEndpoints;
-import com.example.schimb.service.ExchangeRateService;
+import com.example.schimb.service.exchange.ExchangeRateService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.Date;
 
 
 /**

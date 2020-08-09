@@ -1,24 +1,15 @@
 package com.example.schimb.service.implementations;
 
 
-import com.example.schimb.exceptions.CurrencyNotFoundException;
-import com.example.schimb.model.Currency;
-import com.example.schimb.model.ExchangeOperation;
-import com.example.schimb.model.ExchangeRate;
-import com.example.schimb.repository.CurrencyExchangeRepository;
-import com.example.schimb.repository.CurrencyOperationRepository;
+import com.example.schimb.model.exchange.ExchangeOperation;
+import com.example.schimb.repository.exchange.CurrencyOperationRepository;
 import com.example.schimb.rest.payload.ExchangeOperationRequest;
-import com.example.schimb.rest.payload.ExchangeRateSetRequest;
-import com.example.schimb.service.ExchangeOpsService;
-import com.example.schimb.service.ExchangeRateService;
+import com.example.schimb.service.exchange.ExchangeOpsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 
 /**

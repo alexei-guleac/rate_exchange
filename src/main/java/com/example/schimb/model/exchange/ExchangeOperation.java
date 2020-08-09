@@ -1,4 +1,4 @@
-package com.example.schimb.model;
+package com.example.schimb.model.exchange;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,36 +13,40 @@ import java.util.Date;
 
 
 /**
- * Exchange rate model class
+ * Exchange rate operation class
  */
-@Entity(name = "exchange_rate")
+@Entity(name = "exchange_operation")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicUpdate
-@ApiModel(description = "Exchange rate model")
-public class ExchangeRate {
+@ApiModel(description = "Exchange operation model")
+public class ExchangeOperation {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "currency")
     @ApiModelProperty(notes = "Exchange currency")
     private Currency currency;
 
-    @Column(name = "factor")
-    @ApiModelProperty(notes = "Exchange factor")
-    private Integer factor;
-
     @Column(name = "rate")
     @ApiModelProperty(notes = "Currency exchange rate")
     private Double rate;
 
-    @Column(name = "updated_at")
-    @ApiModelProperty(notes = "Currency exchange rate updated at date")
-    private Date updatedAt;
+    @Column(name = "amount_received")
+    @ApiModelProperty(notes = "Amount received")
+    private Double amountReceived;
+
+    @Column(name = "issued_amount")
+    @ApiModelProperty(notes = "Amount issued")
+    private Double issuedAmount;
+
+    @Column(name = "performed_at")
+    @ApiModelProperty(notes = "Currency exchange operation performed date")
+    private Date performedAt;
 
 }

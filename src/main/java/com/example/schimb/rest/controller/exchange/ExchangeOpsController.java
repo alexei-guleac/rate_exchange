@@ -1,9 +1,9 @@
-package com.example.schimb.rest.controller;
+package com.example.schimb.rest.controller.exchange;
 
-import com.example.schimb.model.ExchangeOperation;
+import com.example.schimb.model.exchange.ExchangeOperation;
 import com.example.schimb.rest.payload.ExchangeOperationRequest;
 import com.example.schimb.service.ApiEndpoints;
-import com.example.schimb.service.ExchangeOpsService;
+import com.example.schimb.service.exchange.ExchangeOpsService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

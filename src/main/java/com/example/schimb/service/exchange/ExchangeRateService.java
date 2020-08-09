@@ -1,13 +1,11 @@
-package com.example.schimb.service;
+package com.example.schimb.service.exchange;
 
 import com.example.schimb.exceptions.CurrencyNotFoundException;
-import com.example.schimb.model.Currency;
-import com.example.schimb.model.ExchangeRate;
+import com.example.schimb.model.exchange.Currency;
+import com.example.schimb.model.exchange.ExchangeRate;
 import com.example.schimb.rest.payload.ExchangeRateSetRequest;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface ExchangeRateService {

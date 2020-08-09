@@ -1,4 +1,4 @@
-package com.example.schimb.model;
+package com.example.schimb.model.exchange;
 
 public enum Currency {
     USD("USD"),

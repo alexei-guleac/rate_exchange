@@ -55,21 +55,3 @@ body:
     "amountReceived": 100,
     "issuedAmount": 1662
 }
-
-
-
-
-create table exchange_operation
-(
-	id bigserial not null
-		constraint exchange_operation_pkey
-			primary key,
-	amount_received double precision,
-	currency integer,
-	issued_amount double precision,
-	performed_at timestamp,
-	rate double precision
-);
-
-alter table exchange_operation owner to postgres;
-

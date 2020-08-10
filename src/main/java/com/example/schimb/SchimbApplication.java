@@ -47,7 +47,7 @@ public class SchimbApplication {
             UserDTO userDTO = UserDTO.builder()
                     .age(23)
                     .company("Sample")
-                    .email("qwerty@gmail.com")
+                    .email("sample_user@gmail.com")
                     .firstName("alexei")
                     .lastName("g")
                     .password("admin")

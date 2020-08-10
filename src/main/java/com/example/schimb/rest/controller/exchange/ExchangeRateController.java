@@ -38,7 +38,7 @@ public class ExchangeRateController {
      * @param exchangeRateSetRequest - exchange rate request
      * @return result ExchangeRate
      */
-    @PostMapping(ApiEndpoints.updateByCode)
+    @PostMapping(ApiEndpoints.update)
     public ExchangeRate setExchangeRate(@RequestBody ExchangeRateSetRequest exchangeRateSetRequest) throws CurrencyNotFoundException {
         return exchangeRateService.updateExchangeRateByCurrency(exchangeRateSetRequest);
     }

@@ -1,13 +1,14 @@
-!! Before app start first create db schimb-valutar via pgadmin
+rate_exchange
+!! Before app start first create db schimb-valutar via pGAdmin
 -- table Currency that represents currency codes which are filled automatically at startup with all available codes in Java Moneta API
 -- table Exchange_Rates is filled automatically at startup with exchange rates available on http://data.fixer.io/api/latest against the EURO
 
 API documentation
-http://localhost:8080/v2/api-docs
-
+http://server:port/v2/api-docs
 
 20200809172250
-GET http://localhost:8080/rates
+
+GET /rates
 
 output:
 [
@@ -35,19 +36,17 @@ output:
   ... etc.
 ]
 
-
-GET http://localhost:8080/rates/get?code=USD
+GET /rates/get?code=USD
 
 output:
 {
-    "currencyElement": "USD",
+    "currencyCode": "USD",
     "factor": 1,
-    "rate": 16.62,
-    "dateRate": "2020-08-09T14:22:28.211+00:00"
+    "rate": 1.176118,
+    "dateRate": "2020-08-10T13:56:52.650+00:00"
 }
 
-
-POST http://localhost:8080/rates/update
+POST /rates/update
 
 body:
 {
@@ -69,15 +68,14 @@ output:
     "updatedAt": "2020-08-10T13:13:14.345+00:00"
 }
 
-
-POST http://localhost:8080/exchange
+POST /exchange
 
 body:
 {
-    "currencyElement": "USD",
-    "rate": 16.62,
+    "currencyCode": "GBP",
+    "rate": 18.86,
     "amountReceived": 100,
-    "issuedAmount": 1662
+    "issuedAmount": 1886
 }
 
 output:
@@ -91,4 +89,14 @@ output:
     "amountReceived": 100.0,
     "issuedAmount": 1886.0,
     "performedAt": "2020-08-10T13:11:44.510+00:00"
+}
+
+PUT /cash/update?username=sample_user@gmail.com&code=usd&amount=123&date=10/08/2020
+
+output:
+{
+    "username": "sample_user@gmail.com",
+    "currencyCode": "USD",
+    "amount": 123.0,
+    "performedAt": "2020-08-10T21:00:00.000+00:00"
 }

@@ -12,7 +12,7 @@ public class ApiEndpoints {
     public static final String rates = "/rates";
 
     // update by currency code
-    public static final String updateByCode = "/update";
+    public static final String update = "/update";
 
-    public static final String updateCash = "/cash";;
+    public static final String balance = "/cash";
 }

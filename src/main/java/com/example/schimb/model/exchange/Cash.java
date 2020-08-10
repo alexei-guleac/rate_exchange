@@ -1,5 +1,6 @@
 package com.example.schimb.model.exchange;
 
+import com.example.schimb.model.users.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicUpdate
-@ApiModel(description = "Cash model model")
+@ApiModel(description = "Cash model")
 public class Cash {
 
     @Id
@@ -29,20 +30,22 @@ public class Cash {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
-    @ApiModelProperty(notes = "Username")
-    private String username;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @ApiModelProperty(notes = "User data")
+    private User user;
 
-    @Column(name = "currency")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "currency_id")
     @ApiModelProperty(notes = "Exchange currency")
-    private String currency;
+    private CurrencyElement currency;
 
     @Column(name = "amount")
-    @ApiModelProperty(notes = "Amount")
+    @ApiModelProperty(notes = "Monetary amount")
     private Double amount;
 
-    @Column(name = "updated_at")
-    @ApiModelProperty(notes = "Last operation date")
-    private Date updatedAt;
+    @Column(name = "performed_at")
+    @ApiModelProperty(notes = "Cash update performed date")
+    private Date performedAt;
 
 }

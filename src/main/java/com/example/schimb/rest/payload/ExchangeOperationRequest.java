@@ -25,6 +25,7 @@ public class ExchangeOperationRequest {
     private String currencyCode;
 
     @Column(name = "rate")
+    @JsonAlias({"rate"})
     @ApiModelProperty(notes = "Currency exchange rate")
     private Double rate;
 

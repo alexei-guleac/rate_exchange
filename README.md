@@ -1,8 +1,8 @@
 # rate_exchange
 
-!! Before app start first create db schimb-valutar via pgadmin<br />
--- table Currency that represents currency codes which are filled automatically at startup with all avaliable codes in Java Moneta API<br />
--- table Exchange_Rates is filled automatically at startup with exchange rates avaliable on http://data.fixer.io/api/latest against the EURO<br />
+!! Before app start first create db schimb-valutar via pGAdmin<br />
+-- table Currency that represents currency codes which are filled automatically at startup with all available codes in Java Moneta API<br />
+-- table Exchange_Rates is filled automatically at startup with exchange rates available on http://data.fixer.io/api/latest against the EURO<br />
 
 ## API documentation
 http://server:port/v2/api-docs
@@ -104,5 +104,17 @@ output:
     "amountReceived": 100.0,
     "issuedAmount": 1886.0,
     "performedAt": "2020-08-10T13:11:44.510+00:00"
+}
+```
+
+## PUT /cash/update?username=sample_user@gmail.com&code=usd&amount=123&date=10/08/2020
+
+```
+output:
+{
+    "username": "sample_user@gmail.com",
+    "currencyCode": "USD",
+    "amount": 123.0,
+    "performedAt": "2020-08-10T21:00:00.000+00:00"
 }
 ```

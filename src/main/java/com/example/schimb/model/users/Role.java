@@ -1,9 +1,11 @@
 package com.example.schimb.model.users;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -27,6 +29,8 @@ public class Role implements GrantedAuthority {
     @NotNull
     private String name;
 
+    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "role",
             cascade = CascadeType.ALL)

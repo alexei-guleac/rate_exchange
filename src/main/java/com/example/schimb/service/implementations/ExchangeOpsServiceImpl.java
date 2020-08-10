@@ -1,14 +1,17 @@
 package com.example.schimb.service.implementations;
 
 
+import com.example.schimb.model.exchange.CurrencyElement;
 import com.example.schimb.model.exchange.ExchangeOperation;
 import com.example.schimb.repository.exchange.CurrencyOperationRepository;
 import com.example.schimb.rest.payload.ExchangeOperationRequest;
 import com.example.schimb.service.exchange.ExchangeOpsService;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.money.Monetary;
 import java.util.Date;
 
 
@@ -31,8 +34,11 @@ public class ExchangeOpsServiceImpl implements ExchangeOpsService {
     @Override
     public ExchangeOperation save(ExchangeOperationRequest exchangeOperationRequest) {
 
+        @NonNull String currencyCode = exchangeOperationRequest.getCurrencyCode();
         ExchangeOperation exchangeOperation = ExchangeOperation.builder()
-                .currency(exchangeOperationRequest.getCurrencyCode())
+                .currency(
+                        new CurrencyElement(
+                                Monetary.getCurrency(currencyCode).getNumericCode(), currencyCode))
                 .rate(exchangeOperationRequest.getRate())
                 .amountReceived(exchangeOperationRequest.getAmountReceived())
                 .issuedAmount(exchangeOperationRequest.getIssuedAmount())

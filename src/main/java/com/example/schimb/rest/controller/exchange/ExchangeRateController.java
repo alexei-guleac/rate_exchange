@@ -1,7 +1,6 @@
 package com.example.schimb.rest.controller.exchange;
 
 import com.example.schimb.exceptions.CurrencyNotFoundException;
-import com.example.schimb.model.exchange.Currency;
 import com.example.schimb.model.exchange.ExchangeRate;
 import com.example.schimb.rest.payload.ExchangeRateResponse;
 import com.example.schimb.rest.payload.ExchangeRateSetRequest;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(value = "Exchange rate Controller")
 @RestController
+@RequestMapping(ApiEndpoints.rates)
 @Slf4j
 public class ExchangeRateController {
 
@@ -38,8 +38,8 @@ public class ExchangeRateController {
      * @param exchangeRateSetRequest - exchange rate request
      * @return result ExchangeRate
      */
-    @PostMapping(ApiEndpoints.setByCode)
-    public ExchangeRate setExchangeRate(@RequestBody ExchangeRateSetRequest exchangeRateSetRequest) {
+    @PostMapping(ApiEndpoints.updateByCode)
+    public ExchangeRate setExchangeRate(@RequestBody ExchangeRateSetRequest exchangeRateSetRequest) throws CurrencyNotFoundException {
         return exchangeRateService.updateExchangeRateByCurrency(exchangeRateSetRequest);
     }
 
@@ -50,21 +50,14 @@ public class ExchangeRateController {
      * @return result ExchangeRate
      * @throws CurrencyNotFoundException if currency code not found
      */
-    @GetMapping(ApiEndpoints.getByCode)
-    public ResponseEntity<?> getExchangeRate(@RequestParam String code) throws CurrencyNotFoundException {
-
-        Currency currency;
-        try {
-            currency = Currency.valueOf(code.toUpperCase().strip());
-        } catch (IllegalArgumentException e) {
-            throw new CurrencyNotFoundException(
-                    "Invalid value for currency: " + code + " :: " + e.getMessage());
-        }
-
-        ExchangeRate exchangeRate = exchangeRateService.findByCurrency(currency);
+    @GetMapping("/get")
+    public ResponseEntity<?> getExchangeRate(@RequestParam String code)
+            throws CurrencyNotFoundException {
+        log.info(code);
+        ExchangeRate exchangeRate = exchangeRateService.findByCurrencyCode(code);
 
         ExchangeRateResponse exchangeRateResponse = ExchangeRateResponse.builder()
-                .currencyCode(exchangeRate.getCurrency())
+                .currencyCode(exchangeRate.getCurrency().getCode())
                 .rate(exchangeRate.getRate())
                 .factor(exchangeRate.getFactor())
                 .dateRate(exchangeRate.getUpdatedAt())
@@ -78,7 +71,7 @@ public class ExchangeRateController {
      *
      * @return list of exchange rates
      */
-    @GetMapping(ApiEndpoints.rates)
+    @GetMapping
     public ResponseEntity<?> getExchangeRates() {
         return ResponseEntity.ok(exchangeRateService.findAll());
     }

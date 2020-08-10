@@ -2,7 +2,6 @@ package com.example.schimb.service.implementations;
 
 
 import com.example.schimb.exceptions.CurrencyNotFoundException;
-import com.example.schimb.model.exchange.Currency;
 import com.example.schimb.model.exchange.ExchangeRate;
 import com.example.schimb.repository.exchange.CurrencyExchangeRepository;
 import com.example.schimb.rest.payload.ExchangeRateSetRequest;
@@ -11,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,15 +36,35 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     @Override
-    public ExchangeRate findByCurrency(Currency currency) throws CurrencyNotFoundException {
-        return exchangeRateRepository.findByCurrency(currency).orElseThrow(
-                () -> new CurrencyNotFoundException("Invalid currency " + currency));
+    public ExchangeRate findByCurrencyCode(String currencyCode) throws CurrencyNotFoundException {
+
+        long numericCode = 0;
+        try {
+            CurrencyUnit curr = Monetary.getCurrency(currencyCode.toUpperCase().strip());
+            numericCode = curr.getNumericCode();
+        } catch (NullPointerException | IllegalArgumentException e) {
+            throw new CurrencyNotFoundException(
+                    "Invalid value for currency: " + numericCode + " :: " + e.getMessage());
+        }
+
+        long finalNumericCode = numericCode;
+        return exchangeRateRepository.findByCurrencyId(numericCode).orElseThrow(
+                () -> new CurrencyNotFoundException("Invalid currency " + finalNumericCode));
     }
 
     @Override
-    public ExchangeRate updateExchangeRateByCurrency(ExchangeRateSetRequest exchangeRateSetRequest) {
+    public ExchangeRate updateExchangeRateByCurrency(ExchangeRateSetRequest exchangeRateSetRequest) throws CurrencyNotFoundException {
 
-        Optional<ExchangeRate> optionalExchangeRate = exchangeRateRepository.findByCurrency(exchangeRateSetRequest.getCurrencyCode());
+        long numericCode = 0;
+        try {
+            CurrencyUnit curr = Monetary.getCurrency(exchangeRateSetRequest.getCurrencyCode().toUpperCase().strip());
+            numericCode = curr.getNumericCode();
+        } catch (NullPointerException | IllegalArgumentException e) {
+            throw new CurrencyNotFoundException(
+                    "Invalid value for currency: " + numericCode + " :: " + e.getMessage());
+        }
+
+        Optional<ExchangeRate> optionalExchangeRate = exchangeRateRepository.findByCurrencyId(numericCode);
         ExchangeRate updatedExchangeRate = optionalExchangeRate.get();
         log.info(updatedExchangeRate.toString());
 

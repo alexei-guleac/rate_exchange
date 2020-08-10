@@ -29,9 +29,10 @@ public class ExchangeOperation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "currency")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "currency_id")
     @ApiModelProperty(notes = "Exchange currency")
-    private Currency currency;
+    private CurrencyElement currency;
 
     @Column(name = "rate")
     @ApiModelProperty(notes = "Currency exchange rate")

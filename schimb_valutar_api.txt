@@ -1,6 +1,6 @@
-// orange
-
--- before app start first create db schimb-valutar via pgadmin
+!! Before app start first create db schimb-valutar via pgadmin
+-- table Currency that represents currency codes which are filled automatically at startup with all available codes in Java Moneta API
+-- table Exchange_Rates is filled automatically at startup with exchange rates available on http://data.fixer.io/api/latest against the EURO
 
 API documentation
 http://localhost:8080/v2/api-docs
@@ -13,45 +13,82 @@ output:
 [
   {
     "id": 1,
-    "currency": "USD",
+    "currency": {
+      "id": 784,
+      "code": "AED"
+    },
     "factor": 1,
-    "rate": 16.62,
-    "updatedAt": "2020-08-09T14:22:28.211+00:00"
+    "rate": 4.320354,
+    "updatedAt": "2020-08-10T13:10:58.549+00:00"
   },
   {
     "id": 2,
-    "currency": "EUR",
+    "currency": {
+      "id": 971,
+      "code": "AFN"
+    },
     "factor": 1,
-    "rate": 19.68,
-    "updatedAt": "2020-08-09T14:22:28.211+00:00"
+    "rate": 91.55869,
+    "updatedAt": "2020-08-10T13:10:58.549+00:00"
   },
-  {
-    "id": 3,
-    "currency": "BGN",
-    "factor": 1,
-    "rate": 10.07,
-    "updatedAt": "2020-08-09T14:22:28.211+00:00"
-  }
+
+  ... etc.
 ]
 
 
-GET http://localhost:8080//retrieve?code=usd
+GET http://localhost:8080/rates/get?code=USD
 
 output:
 {
-    "currencyCode": "USD",
+    "currencyElement": "USD",
     "factor": 1,
     "rate": 16.62,
     "dateRate": "2020-08-09T14:22:28.211+00:00"
 }
 
 
-POST http://localhost:8080//exchange
+POST http://localhost:8080/rates/update
 
 body:
 {
     "currencyCode": "USD",
+    "factor": 10,
+    "rate": 16.35,
+    "updatedAt": "2020-08-10T13:02:48.002+00:00"
+}
+
+output:
+{
+    "id": 142,
+    "currency": {
+        "id": 840,
+        "code": "USD"
+    },
+    "factor": 10,
+    "rate": 16.35,
+    "updatedAt": "2020-08-10T13:13:14.345+00:00"
+}
+
+
+POST http://localhost:8080/exchange
+
+body:
+{
+    "currencyElement": "USD",
     "rate": 16.62,
     "amountReceived": 100,
     "issuedAmount": 1662
+}
+
+output:
+{
+    "id": 1,
+    "currency": {
+        "id": 826,
+        "code": "GBP"
+    },
+    "rate": 18.86,
+    "amountReceived": 100.0,
+    "issuedAmount": 1886.0,
+    "performedAt": "2020-08-10T13:11:44.510+00:00"
 }

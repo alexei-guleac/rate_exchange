@@ -1,6 +1,5 @@
 package com.example.schimb.rest.payload;
 
-import com.example.schimb.model.exchange.Currency;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -21,7 +20,7 @@ public class ExchangeRateSetRequest {
     @JsonAlias({"currencyCode"})
     @ApiModelProperty(notes = "Currency code. ", required = true)
     @NonNull
-    private Currency currencyCode;
+    private String currencyCode;
 
     @JsonProperty()
     @JsonAlias({"factor"})

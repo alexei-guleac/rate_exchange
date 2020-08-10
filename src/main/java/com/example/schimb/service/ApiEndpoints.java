@@ -11,11 +11,8 @@ public class ApiEndpoints {
     // get all rates
     public static final String rates = "/rates";
 
-    // get by currency code
-    public static final String getByCode = "/retrieve";
-
     // update by currency code
-    public static final String setByCode = "/update";
+    public static final String updateByCode = "/update";
 
     public static final String updateCash = "/cash";;
 }

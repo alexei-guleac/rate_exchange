@@ -31,11 +31,11 @@ public class Cash {
 
     @Column(name = "username")
     @ApiModelProperty(notes = "Username")
-    private Currency username;
+    private String username;
 
     @Column(name = "currency")
     @ApiModelProperty(notes = "Exchange currency")
-    private Currency currency;
+    private String currency;
 
     @Column(name = "amount")
     @ApiModelProperty(notes = "Amount")

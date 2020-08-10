@@ -45,10 +45,10 @@ output:
 output:
 ```
 {
-    "currencyElement": "USD",
+    "currencyCode": "USD",
     "factor": 1,
-    "rate": 16.62,
-    "dateRate": "2020-08-09T14:22:28.211+00:00"
+    "rate": 1.176118,
+    "dateRate": "2020-08-10T13:56:52.650+00:00"
 }
 ```
 
@@ -85,10 +85,10 @@ output:
 body:
 ```
 {
-    "currencyElement": "USD",
-    "rate": 16.62,
+    "currencyCode": "GBP",
+    "rate": 18.86,
     "amountReceived": 100,
-    "issuedAmount": 1662
+    "issuedAmount": 1886
 }
 ```
 

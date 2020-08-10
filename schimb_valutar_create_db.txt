@@ -1,15 +1,45 @@
 
 DATABASE
 
+create table currency
+(
+	id bigint not null
+		constraint currency_pkey
+			primary key,
+	code varchar(255) not null
+);
+
+alter table currency owner to postgres;
+
+
+create table exchange_operation
+(
+	id bigserial not null
+		constraint exchange_operation_pkey
+			primary key,
+	amount_received double precision,
+	issued_amount double precision,
+	performed_at timestamp,
+	rate double precision,
+	currency_id bigint
+		constraint fk8redmv0wvobr5we83xuf27myx
+			references currency
+);
+
+alter table exchange_operation owner to postgres;
+
+
 create table exchange_rate
 (
 	id bigint not null
 		constraint exchange_rate_pkey
 			primary key,
-	currency integer,
 	factor integer,
 	rate double precision,
-	updated_at timestamp
+	updated_at timestamp,
+	currency_id bigint
+		constraint fk55yjrct1osthhit3wsdy63omr
+			references currency
 );
 
 alter table exchange_rate owner to postgres;
@@ -29,16 +59,49 @@ create table cash
 alter table cash owner to postgres;
 
 
-create table exchange_operation
+create table roles
 (
 	id bigserial not null
-		constraint exchange_operation_pkey
+		constraint roles_pkey
 			primary key,
-	amount_received double precision,
-	currency integer,
-	issued_amount double precision,
-	performed_at timestamp,
-	rate double precision
+	name varchar(255) not null
 );
 
-alter table exchange_operation owner to postgres;
+alter table roles owner to postgres;
+
+
+create table user_audit
+(
+	id bigserial not null
+		constraint user_audit_pkey
+			primary key,
+	email varchar(255) not null,
+	registration_date timestamp,
+	telephone_number varchar(255)
+);
+
+alter table user_audit owner to postgres;
+
+
+create table users
+(
+	id integer not null
+		constraint users_pkey
+			primary key,
+	age integer not null
+		constraint users_age_check
+			check (age >= 18),
+	email varchar(255) not null
+		constraint uk_6dotkott2kjsp8vw4d0m25fb7
+			unique,
+	first_name varchar(255) not null,
+	last_name varchar(255) not null,
+	password varchar(255) not null,
+	photo bytea,
+	telephone_number varchar(255) not null,
+	role_id bigint
+		constraint fkp56c1712k691lhsyewcssf40f
+			references roles
+);
+
+alter table users owner to postgres;
